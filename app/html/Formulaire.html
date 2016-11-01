@@ -1,0 +1,46 @@
+<div class="container" style="margin-top:40px;background-color: #428bca;">
+    <div class="row" style="">
+        <h3 class="col-lg-12 text-center">
+            <span> <i class="glyphicon glyphicon-user"></i> </span>
+            Formulaire pour créer un compte: {{client.Prenom}}
+            {{client.Nom}}</h3>
+    </div>
+</div>
+<form name="formDemo" style="margin-top:40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group col-lg-2 col-lg-offset-1">
+                    <label class="control-label">Sexe</label>
+                    <select id="sexe" name="sexe" class="form-control"
+                            [(ngModel)]="client.Sexe">
+                        <option *ngFor="let s of Sexes"
+                                [value]="s.Code">{{s.Libelle}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                    <label class="control-label" for="prenom">Prénom</label>
+                    <input type="text" class="form-control" id="prenom"  name="prenom" [(ngModel)]="client.Prenom">
+                </div>
+                <div class="form-group col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                    <label class="control-label" for="nom">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="client.Nom">
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <div class="form-group col-lg-10 col-md-10 col-lg-offset-1">
+                    <label class="control-label" for="email">Adresse email</label>
+                    <input type="text" class="form-control" id="email"   name="email" [(ngModel)]="client.AdresseMail">
+                </div>
+            </div>
+            <div>
+                <div class='text-center'>
+                    <div class="btn-group">
+                        <button type="button" id="btnValide" name="btnValide" class="btn btnprimary center-block" (click)="onClick_Valider(client)"> Valider </button>
+                        <button type="button" id="btnAnnuler" name="btnAnnuler" class="btn btninfo center-block" (click)="onClick_Annuler()"> Annuler </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
