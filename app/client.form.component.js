@@ -32,7 +32,8 @@ var ClientFormComponent = (function () {
     ClientFormComponent = __decorate([
         core_1.Component({
             selector: 'client-form',
-            templateUrl: 'app/html/Formulaire.html'
+            templateUrl: 'app/html/Formulaire.html',
+            styles: [".ng-valid { border-color: green; }\n                .ng-invalid { border-color: red; }"]
         }), 
         __metadata('design:paramtypes', [])
     ], ClientFormComponent);

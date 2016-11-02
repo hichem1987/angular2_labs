@@ -6,38 +6,55 @@
             {{client.Nom}}</h3>
     </div>
 </div>
-<form name="formDemo" style="margin-top:40px;">
+<form name="formDemo" style="margin-top:40px;" #formClient="ngForm">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="form-group col-lg-2 col-lg-offset-1">
                     <label class="control-label">Sexe</label>
                     <select id="sexe" name="sexe" class="form-control"
-                            [(ngModel)]="client.Sexe">
+                            [(ngModel)]="client.Sexe" required>
                         <option *ngFor="let s of Sexes"
-                                [value]="s.Code">{{s.Libelle}}</option>
+                                [value]="s.Code">{{s.Libelle}}
+                        </option>
                     </select>
                 </div>
-                <div class="form-group col-lg-4 col-md-5 col-sm-6 col-xs-12">
-                    <label class="control-label" for="prenom">Prénom</label>
-                    <input type="text" class="form-control" id="prenom"  name="prenom" [(ngModel)]="client.Prenom">
+                <div class="form-group col-lg-4 col-md-5 col-sm-6 col-xs-12"
+                     [ngClass]="{'has-error': !prenom.valid, 'has-success': prenom.valid}">
+                    <label class="control-label" for="prenom">Pr&eacute;nom</label>
+                    <input type="text" class="form-control" required maxlength="50" minlength="2" id="prenom"
+                           name="prenom" [(ngModel)]="client.Prenom" #prenom="ngModel">
                 </div>
+                <div *ngIf="prenom.errors && prenom.touched">
+<span class="text-danger" *ngIf="prenom.errors.minlength">
+Le prénom doit être au minumum 2 caractéres </span>
+<span class="text-danger" *ngIf="prenom.errors.required">
+Le prénom est obligatoire </span>
+                </div>
+                <pre *ngIf="prenom.errors">{{ prenom.errors | json }}</pre>
                 <div class="form-group col-lg-4 col-md-5 col-sm-6 col-xs-12">
                     <label class="control-label" for="nom">Nom</label>
-                    <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="client.Nom">
+                    <input type="text" class="form-control" id="nom" name="nom" required maxlength="50" minlength="2"
+                           [(ngModel)]="client.Nom">
                 </div>
             </div>
             <div class="col-lg-12 col-md-12">
                 <div class="form-group col-lg-10 col-md-10 col-lg-offset-1">
                     <label class="control-label" for="email">Adresse email</label>
-                    <input type="text" class="form-control" id="email"   name="email" [(ngModel)]="client.AdresseMail">
+                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="client.AdresseMail"
+                           required
+                           pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
                 </div>
             </div>
             <div>
                 <div class='text-center'>
                     <div class="btn-group">
-                        <button type="button" id="btnValide" name="btnValide" class="btn btnprimary center-block" (click)="onClick_Valider(client)"> Valider </button>
-                        <button type="button" id="btnAnnuler" name="btnAnnuler" class="btn btninfo center-block" (click)="onClick_Annuler()"> Annuler </button>
+                        <button type="button" id="btnValide" name="btnValide" class="btn btnprimary center-block"
+                                (click)="onClick_Valider(formClient)" [disabled]="formClient.invalid"> Valider
+                        </button>
+                        <button type="button" id="btnAnnuler" name="btnAnnuler" class="btn btninfo center-block"
+                                (click)="onClick_Annuler()"> Annuler
+                        </button>
                     </div>
                 </div>
             </div>
